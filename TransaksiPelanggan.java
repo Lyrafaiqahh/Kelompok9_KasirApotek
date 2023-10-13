@@ -41,9 +41,12 @@ public class TransaksiPelanggan {
             System.out.println("Selamat anda dapat diskon 35% dan mendapatkan tambahan poin 20, silahkan dikumpulkan sampai 100 poin jika ingin mendapatkan doorprize");
         }
         
-            else {
+            else if (total >=500000){
             System.out.println("Selamat anda dapat diskon 40% dan mendapatkan tambahan poin 25, silahkan dikumpulkan sampai 100 poin jika ingin mendapatkan doorprize");
         }
+            else {
+                System.out.println("Terjadi kesalahan");
+            }
     } else {
         Scanner sc2 = new Scanner(System.in);
         System.out.println("Daftar sekarang! Isi biodata anda!");
@@ -56,6 +59,7 @@ public class TransaksiPelanggan {
         System.out.println("alamat : ");
         alamat = sc2.nextLine();
         System.out.println("Selamat dengan nama\n" + nama + "\ntelah menjadi Member Premium");
+
     }
         } 
     } 
