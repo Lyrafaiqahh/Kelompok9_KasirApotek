@@ -15,7 +15,6 @@ public class DataObat {
         for (int i = 0; i < obatObatan.length; i++) {
             System.out.println((i + 1) + ". " + obatObatan[i]);
         }
-
         System.out.print("Masukkan nomor obat yang ingin Anda pilih: ");
         int nomorObat = scanner.nextInt();
 
@@ -78,9 +77,7 @@ public class DataObat {
         }
         } 
         else {
-            System.out.println("Nomor obat tidak valid. Silakan masukkan nomor obat yang benar.");
+            System.out.println("Nomor obat tidak valid. Masukkan nomor obat yang benar!");
         }
-
-
     }
 }
