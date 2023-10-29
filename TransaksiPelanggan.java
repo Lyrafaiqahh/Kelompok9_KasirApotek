@@ -26,23 +26,28 @@ public class TransaksiPelanggan {
             System.out.println("Apakah Pelanggan mempunyai kartu member (y atau t)? ");
         kartuMember = sc1.nextLine();
         if (kartuMember.equalsIgnoreCase("y")){
-        System.out.println("Masukkan harga total obat yang dibeli");
+        System.out.println("Harga total yang anda beli " + jumlah);
         total = sc.nextInt();
-        if (total >= 100000 && total < 200000 ) {     
+        if (jumlah >= 100000 && jumlah < 200000 ) {     
             System.out.println("Selamat anda dapat diskon 20% dan mendapatkan tambahan poin 5, silahkan dikumpulkan sampai 100 poin jika ingin mendapatkan doorprize");
         } 
-            else if (total >= 200000 && total < 300000 ){
+            else if (jumlah >= 200000 && jumlah < 300000 ){
             System.out.println("Selamat anda dapat diskon 25% dan mendapatkan tambahan poin 10, silahkan dikumpulkan sampai 100 poin jika ingin mendapatkan doorprize");
         }
-            else if (total >= 300000 && total < 400000 ){
+            else if (jumlah >= 300000 && jumlah < 400000 ){
             System.out.println("Selamat anda dapat diskon 30% dan mendapatkan tambahan poin 15, silahkan dikumpulkan sampai 100 poin jika ingin mendapatkan doorprize");
         }
-            else if (total >= 400000 && total <= 500000 ){
+            else if (jumlah >= 400000 && jumlah <= 500000 ){
             System.out.println("Selamat anda dapat diskon 35% dan mendapatkan tambahan poin 20, silahkan dikumpulkan sampai 100 poin jika ingin mendapatkan doorprize");
+        }   
+            else if (jumlah >=500000){
         }
-        
             else if (total >=500000){
             System.out.println("Selamat anda dapat diskon 40% dan mendapatkan tambahan poin 25, silahkan dikumpulkan sampai 100 poin jika ingin mendapatkan doorprize");
+            }
+            
+            else {
+            System.out.println("Mohon maaf, terkait pendapatan diskon dan poin minimal nominal pembelian harus Rp.100.000,-");
         }
             else {
                 System.out.println("Terjadi kesalahan");
