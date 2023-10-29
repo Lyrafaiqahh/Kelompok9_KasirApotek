@@ -20,7 +20,7 @@ public class DataObat {
         int nomorObat = scanner.nextInt();
 
         if (nomorObat >= 1 && nomorObat <= obatObatan.length) 
-        {
+        {                                                                                                                                                               
             String namaObat = obatObatan[nomorObat - 1];
             System.out.println("Obat yang Anda pilih adalah: " + namaObat);
         do 
