@@ -26,11 +26,12 @@ public class KasirApotekFinal {
             System.out.println("Pilihan tidak valid. Aplikasi akan ditutup.");
         }
     }
-
     private static void fiturUser() {
+        // The fiturIdentifikasiKadaluwarsa() is removed from here
+        // as it is now part of fiturAdmin()
         System.out.println("\n--- Fitur User ---");
-        System.out.println("1. Identifikasi Kadaluwarsa");
-        System.out.println("2. Pembayaran");
+        System.out.println("1. Pembayaran");
+        System.out.println("2. Exit");
         System.out.print("Masukkan pilihan Anda: ");
 
         Scanner scanner = new Scanner(System.in);
@@ -38,10 +39,9 @@ public class KasirApotekFinal {
 
         switch (userChoice) {
             case 1:
-                fiturIdentifikasiKadaluwarsa();
-                break;
-            case 2:
                 fiturPembayaran();
+            case 2:
+                System.out.println("...Terimakasih 1....");
                 break;
             default:
                 System.out.println("Pilihan tidak valid. Aplikasi akan ditutup.");
@@ -51,7 +51,8 @@ public class KasirApotekFinal {
     private static void fiturAdmin() {
         System.out.println("\n--- Fitur Admin ---");
         System.out.println("1. Kelola Stok Obat");
-        System.out.println("2. Keluar");
+        System.out.println("2. Identifikasi Kadaluwarsa");
+        System.out.println("3. Keluar");
         System.out.print("Masukkan pilihan Anda: ");
 
         Scanner scanner = new Scanner(System.in);
@@ -62,7 +63,10 @@ public class KasirApotekFinal {
                 fiturKelolaStokObat();
                 break;
             case 2:
-                System.out.println("..Terima kasih..");
+                fiturIdentifikasiKadaluwarsa();
+                break;
+            case 3:
+                System.out.println("..Terima kasih 2..");
                 break;
             default:
                 System.out.println("Pilihan tidak valid. Aplikasi akan ditutup.");
@@ -102,12 +106,13 @@ public class KasirApotekFinal {
                         kurangiStok(stokObat);
                         break;
                     case 4:
-                        System.out.println("..Terima kasih..");
+                        System.out.println("..Terima kasih 3..");
                         break;
                     default:
                         System.out.println("Pilihan tidak valid. Harap masukkan angka antara 1 dan 4.");
                 }
-            } while (pilihan != 4);
+            } 
+            while (pilihan != 4);
         }
         
         private static void tampilkanDetailStok(String[][] obatList) {
@@ -232,8 +237,7 @@ public class KasirApotekFinal {
         }
 
     private static void fiturPembayaran() {
-        // Implementasi fiturPembayaran
-        Scanner sc = new Scanner(System.in);
+    Scanner sc = new Scanner(System.in);
 
     int total = 0;
     String[] jenisObatan = {"Obat Batuk", "Obat Pilek", "Obat Pusing"};
@@ -279,7 +283,7 @@ public class KasirApotekFinal {
                 int hargaTerpilih = hargaObat[nomorObat1 - 1];
                 System.out.println("\n" + "Obat yang Anda pilih adalah: " + obatTerpilih);
                 System.out.println("Harga obat yang Anda pilih: Rp." + hargaTerpilih + ",-");
-                total += hargaTerpilih; 
+                total += hargaTerpilih;
             } else {
                 System.out.println("Mohon pilih nomor obat yang benar.");
             }
@@ -289,11 +293,6 @@ public class KasirApotekFinal {
             if (pilihan.equalsIgnoreCase("t")) {
                 memilihObatLagi = false;
                 System.out.println("\nTotal harga obat yang dipilih : Rp." + total + ",-");
-            }
-        }
-
-        boolean inginDiskon = true;
-        while (inginDiskon) {
             if (total > 100000) {
                 System.out.println("\nApakah Anda ingin mendapatkan diskon (y/t)? ");
                 String inginDiskonInput = sc.next();
@@ -319,8 +318,8 @@ public class KasirApotekFinal {
                             }
                             double diskonAmount = total * dis;
                             System.out.println("Selamat Anda dapat diskon " + (dis * 100) + "% dan mendapatkan tambahan poin " + poin + ", silahkan dikumpulkan sampai 100 poin jika ingin mendapatkan doorprize" + "\n" + "Total harga yang harus ada bayar adalah :" + (total - (total * dis)));
-                        } 
-                        inginDiskon = false;
+                        }
+    
                     } else {
                         System.out.println("Daftar sekarang! Isi biodata Anda!");
                         System.out.print("Nama: ");
@@ -336,16 +335,15 @@ public class KasirApotekFinal {
                         System.out.print("Password: ");
                         String password = sc.next();
                         System.out.println("Selamat dengan nama\n" + nama + "\ntelah menjadi Member Premium");
-                        inginDiskon = false;
+                
                     }
                 } else {
                     System.out.println("Total harga yang harus dibayar sebanyak : Rp." + total + ",-");
                     break;
-                        }
-                    } 
-                }
-            } else {
-                System.out.println("Mohon masukkan nomor jenis obat yang benar.");
-            }
+                    }
+                } 
+            } 
+        }
     }
-}
+} 
+    }
