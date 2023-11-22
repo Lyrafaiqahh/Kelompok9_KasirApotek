@@ -1,8 +1,10 @@
+package USER;
 import java.util.Scanner;
+// NESTED IF
 public class KartuMember {
     public static void main(String[] args) {
         Scanner input = new Scanner (System.in);
-        
+     
             String kartu_member,nama,umur,tmpt_tgl_Lahir,alamat,gmail,password;
             double dis;
             int poin,hrg_total_obat;

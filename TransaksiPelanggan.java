@@ -1,5 +1,5 @@
 import java.util.Scanner;
-
+// LOOP DO WHILE DAN NESTED IF
 public class TransaksiPelanggan {
     public static void main(String args[]) {
         int jumlah = 0, counter = 0, obat, total,poin,diskon,jmlhObat,bayar;

@@ -1,6 +1,8 @@
 import java.util.Scanner;
+ // DISCLAIMER INI CODINGAN POV : PENGELOLA/ADMIN 
+    // ARRAY 2 DIMENSI   
 public class medicineStock {
-    // DISCLAIMER INI CODINGAN POV : PENGELOLA/ADMIN    
+   
   private static final String[][] medicineStock = {
       { "Obat Batuk", "10" },
       { "Obat Pilek", "10" },
@@ -65,7 +67,7 @@ public class medicineStock {
         }
         break;
       }
-    }
+    } 
     if (!found) {
       System.out.println("Medicine not found in the stock list.");
     }
