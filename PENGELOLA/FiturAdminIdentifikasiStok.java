@@ -1,4 +1,6 @@
+package PENGELOLA;
 import java.util.Scanner;
+// IF ELSE 
 public class FiturAdminIdentifikasiStok {
 
     public static void main(String[] args) {

@@ -1,5 +1,6 @@
+package USER;
 import java.util.Scanner;
-
+// ARRAY 1 DIMENSI
 public class DataObat {
     public static void main(String args[]) {
         int jumlah = 0, counter = 0, obat, total, poin, diskon, jmlhObat, bayar;
@@ -15,6 +16,7 @@ public class DataObat {
         for (int i = 0; i < obatObatan.length; i++) {
             System.out.println((i + 1) + ". " + obatObatan[i]);
         }
+        
         System.out.print("Masukkan nomor obat yang ingin Anda pilih: ");
         int nomorObat = scanner.nextInt();
 
