@@ -371,7 +371,7 @@ public class Kasir90 {
    for (int i = 0; i < jenisObatan.length; i++) {
     System.out.println((i + 1) + ". " + jenisObatan[i]);
    }
-
+   
    System.out.print("Masukkan nomor jenis obat yang ingin Anda pilih: ");
    int nomorJenisObat = sc.nextInt();
 
@@ -418,12 +418,12 @@ public class Kasir90 {
      total += hargaTerpilih;
      System.out.println("Total semua harga obat yang dipesan : Rp." + total + ",-");
 
-    } else if (nomorObat1 > namaObat.length) {
+    } else  {
      System.out.println("\nMohon pilih nomor obat yang benar! Pesanan obat anda akan hangus jika memasukkan nomor obat yang salah!");
      System.out.println("\n..Mengulang...");
      break;
 
-    }
+    } 
 
     memilihObatLagi = true;
     pilihObatLagi = String.valueOf(memilihObatLagi);
@@ -572,9 +572,21 @@ System.out.println();
   return total;
  }
  private static boolean tanyaUlangProgram() {
-    System.out.print("\nApakah Anda ingin memulai kembali program? (y/t): ");
-    char pilihan = scanner.next().charAt(0);
+    boolean validInput = false;
+    char pilihan;
+
+    do {
+        System.out.print("\nApakah Anda ingin memulai kembali program? (y/t): ");
+        pilihan = scanner.next().charAt(0);
+
+        if (pilihan == 'y' || pilihan == 'Y' || pilihan == 't' || pilihan == 'T') {
+            validInput = true;
+        } else {
+            System.out.println("Mohon maaf, Anda salah input. Silakan masukkan 'y' atau 't'.");
+        }
+    } while (!validInput);
 
     return (pilihan == 'y' || pilihan == 'Y');
-    }
+}
+
 }
