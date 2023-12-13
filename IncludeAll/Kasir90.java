@@ -6,10 +6,11 @@ public class Kasir90 {
     private static int[] totalPembelian = new int[100];
     private static int indeksTransaksi = 0;
     private static final String ADMIN_PASSWORD = "admin123";
+    private static boolean ulangProgram = false;
     private static Scanner scanner = new Scanner(System.in); 
 
     public static void main(String[] args) {
-        boolean ulangProgram = true;
+         ulangProgram = true;
 
         do {
             System.out.println("Selamat datang di Aplikasi Apotek");
@@ -30,12 +31,10 @@ public class Kasir90 {
 
                 } else {
                     System.out.println("Password salah. Aplikasi akan ditutup.");
-                    System.exit(0);
                 }
 
             } else {
                 System.out.println("Pilihan tidak valid. Aplikasi akan ditutup.");
-                System.exit(0);
             }
 
             ulangProgram = tanyaUlangProgram();
@@ -63,7 +62,6 @@ public class Kasir90 {
 
             default:
                 System.out.println("Pilihan tidak valid. Aplikasi akan ditutup.");
-                System.exit(0);
         }
     }
 
@@ -80,27 +78,23 @@ public class Kasir90 {
         switch (adminChoice) {
             case 1:
                 fiturKelolaStokObat();
-                System.exit(0);
                 break;
 
             case 2:
                 fiturIdentifikasiKadaluwarsa();
-                System.exit(0);
                 break;
 
             case 3:
                 lihatTotalTransaksi();
-                System.exit(0);
                 break;
 
             case 4:
                 System.out.println("..Keluar..");
-                System.exit(0);
+                ulangProgram = true;
                 break;
 
             default:
                 System.out.println("Pilihan tidak valid. Aplikasi akan ditutup.");
-                System.exit(0);
         }
     }
 
@@ -190,7 +184,6 @@ public class Kasir90 {
      break;
     case 4:
      System.out.println("..Keluar..");
-     System.exit(0);
      break;
     default:
      System.out.println("Pilihan tidak valid, harap masukkan angka 1-4!");
@@ -371,7 +364,7 @@ public class Kasir90 {
    for (int i = 0; i < jenisObatan.length; i++) {
     System.out.println((i + 1) + ". " + jenisObatan[i]);
    }
-   
+
    System.out.print("Masukkan nomor jenis obat yang ingin Anda pilih: ");
    int nomorJenisObat = sc.nextInt();
 
@@ -418,12 +411,11 @@ public class Kasir90 {
      total += hargaTerpilih;
      System.out.println("Total semua harga obat yang dipesan : Rp." + total + ",-");
 
-    } else  {
+    } else if (nomorObat1 > namaObat.length) {
      System.out.println("\nMohon pilih nomor obat yang benar! Pesanan obat anda akan hangus jika memasukkan nomor obat yang salah!");
-     System.out.println("\n..Mengulang...");
      break;
 
-    } 
+    }
 
     memilihObatLagi = true;
     pilihObatLagi = String.valueOf(memilihObatLagi);
@@ -572,21 +564,9 @@ System.out.println();
   return total;
  }
  private static boolean tanyaUlangProgram() {
-    boolean validInput = false;
-    char pilihan;
-
-    do {
-        System.out.print("\nApakah Anda ingin memulai kembali program? (y/t): ");
-        pilihan = scanner.next().charAt(0);
-
-        if (pilihan == 'y' || pilihan == 'Y' || pilihan == 't' || pilihan == 'T') {
-            validInput = true;
-        } else {
-            System.out.println("Mohon maaf, Anda salah input. Silakan masukkan 'y' atau 't'.");
-        }
-    } while (!validInput);
+    System.out.print("\nApakah Anda ingin memulai kembali program? (y/t): ");
+    char pilihan = scanner.next().charAt(0);
 
     return (pilihan == 'y' || pilihan == 'Y');
-}
-
+    }
 }

@@ -1,6 +1,7 @@
 import java.util.Scanner;
 
-public class KasirApotekFinal {
+public class KASIRFIX {
+  private static String semua = "";
   private static int totalTransaksiPembayaran = 0;
   private static int[] totalTransaksi = new int[100]; // Anggap maksimum 100 transaksi, sesuaikan jika diperlukan
   private static int[] totalPembelian = new int[100];
@@ -8,7 +9,7 @@ public class KasirApotekFinal {
   private static final String ADMIN_PASSWORD = "admin123";
   private static Scanner scanner = new Scanner(System.in);
   private static boolean ulangProgram = true;
-
+  private static boolean balik = true;
   // BAGIAN PENENTUAN ADMIN ATAU USER //
   public static void main(String[] args) {
     ulangProgram = true;
@@ -19,12 +20,12 @@ public class KasirApotekFinal {
       System.out.println("--------------------------------------------");
       System.out.print("Apakah Anda pengguna (1) | admin (2)? ");
 
-      int multi = scanner.nextInt();
+      char multi = scanner.next().charAt(0);
 
-      if (multi == 1) {
+      if (multi == '1') {
         fiturUser();
 
-      } else if (multi == 2) {
+      } else if (multi == '2') {
         System.out.print("\nMasukkan password admin: ");
         String password = scanner.next();
 
@@ -61,37 +62,28 @@ public class KasirApotekFinal {
       System.out.println("1. Kelola Stok Obat");
       System.out.println("2. Identifikasi Kadaluwarsa");
       System.out.println("3. Total Transaksi");
-      System.out.println("4. Kembali ke menu utama");
+      System.out.println("4. Mengulang program");
       System.out.println("5. Keluar");
-      System.out.print("Masukkan pilihan Anda: ");
+      System.out.print("Masukkan pilihan Anda (berupa angka): ");
       adminChoice = scanner.nextInt();
 
       switch (adminChoice) {
         case 1:
           fiturKelolaStokObat();
-
           break;
-
         case 2:
           fiturIdentifikasiKadaluwarsa();
-
           break;
-
         case 3:
           lihatTotalTransaksi();
-
           break;
-
         case 4:
-          System.out.println("\n...kembali ke menu utama...");
           ulangProgram = true;
           return;
-
         case 5:
           System.out.println("..Keluar..");
           System.exit(0);
           break;
-
         default:
           System.out.println("=============================================================");
           System.out.println("Pilihan tidak sesuai (1),(2),(3) dan (4), Coba lagi!");
@@ -115,7 +107,7 @@ public class KasirApotekFinal {
       System.out.println("3. Kurangi Stok Obat");
       System.out.println("4. Kembali ke menu");
       System.out.println("5. Keluar");
-      System.out.print("\nMasukkan pilihan Anda: ");
+      System.out.print("\nMasukkan pilihan Anda (berupa angka):  ");
 
       pilihan = scanner.nextInt();
 
@@ -158,6 +150,7 @@ public class KasirApotekFinal {
   }
 
   private static void tambahStok(String[][] obatList) {
+    scanner.nextLine();
     System.out.print("\nMasukkan nama obat untuk menambah stok : ");
     String nama = scanner.nextLine();
 
@@ -197,12 +190,16 @@ public class KasirApotekFinal {
     }
 
     if (!ditemukan) {
-      System.out.println("Obat tidak ditemukan dalam daftar stok.");
+      System.out.println("\nObat tidak ditemukan dalam daftar stok.");
+   System.out.println("Masukkan yang benar!");
+   System.out.println("\n...kembali ke menu kelola..");
+   return;
     }
     scanner.close();
   }
 
   private static void kurangiStok(String[][] obatList) {
+    scanner.nextLine();
     System.out.print("\nMasukkan nama obat untuk mengurangi stok : ");
     String nama = scanner.nextLine();
     boolean ditemukan = false;
@@ -244,6 +241,9 @@ public class KasirApotekFinal {
 
     if (!ditemukan) {
       System.out.println("Obat tidak ditemukan dalam daftar stok.");
+   System.out.println("Masukkan yang benar!");
+   System.out.println("\n...kembali ke menu kelola..");
+   return;
     }
     scanner.close();
   }
@@ -309,6 +309,7 @@ public class KasirApotekFinal {
 
   private static void lihatTotalTransaksi() {
     System.out.println("\n---  Menu Total Transaksi ---");
+    System.out.println("Berikut merupakan laporan pendapatan para pengguna yang sudah bertransaksi hari ini :");
     for (int i = 0; i < indeksTransaksi; i++) {
       System.out.println("\nTransaksi ke-" + (i + 1) + ": Rp." + totalPembelian[i] + ",-");
 
@@ -329,7 +330,7 @@ public class KasirApotekFinal {
     }
     System.out.println("==================================================");
     System.out.println("Total Keseluruhan: Rp." + totalKeseluruhan + ",-");
-    System.exit(0);
+    tanyaUlangProgram();
   }
 
   // BAGIAN USER //
@@ -337,14 +338,14 @@ public class KasirApotekFinal {
   private static void fiturUser() {
     System.out.println("\n--- Fitur User ---");
     System.out.println("(1) Yuk, Berbelanja!  || (2) ..Yah Sampai Jumpa..");
-    System.out.print("Masukkan pilihan Anda: ");
+    System.out.print("Masukkan pilihan Anda (Berupa angka): ");
     int userChoice = scanner.nextInt();
 
     switch (userChoice) {
       case 1:
         fiturPembayaran();
         break;
-
+    
       case 2:
         System.out.println("======================================");
         System.out.println("Terimakasih! Bye bye~ ^_^");
@@ -361,16 +362,16 @@ public class KasirApotekFinal {
     int nomorObat1, nomorJenisObat, hargaTerpilih;
     String obatTerpilih;
     String semua = " ";
-    int pilihan;
+    char pilihan;
     String[] namaObat;
     int[] hargaObat;
     String namaJenisObat;
     int total = 0;
-
     String[] jenisObatan = { "Obat Batuk", "Obat Pilek", "Obat Pusing" };
     String pilihObatLagi;
     boolean memilihObatLagi;
     boolean mengulang = false;
+    balik = true;
 
     do {
       System.out.println("\nDaftar Jenis Obat di Apotek:");
@@ -378,7 +379,7 @@ public class KasirApotekFinal {
         System.out.println((i + 1) + ". " + jenisObatan[i]);
       }
 
-      System.out.print("Masukkan nomor jenis obat yang ingin Anda pilih: ");
+      System.out.print("Masukkan nomor jenis obat yang ingin Anda pilih (harus angka): ");
       nomorJenisObat = scanner.nextInt();
 
       if (nomorJenisObat >= 1 && nomorJenisObat <= jenisObatan.length) {
@@ -409,7 +410,7 @@ public class KasirApotekFinal {
             System.out.println((i + 1) + "." + namaObat[i] + "\nHarga: Rp." + hargaObat[i] + ",-\n");
           }
 
-          System.out.print("Masukkan nomor obat yang Anda pilih: ");
+          System.out.print("Masukkan nomor obat yang Anda pilih (harus angka): ");
           nomorObat1 = scanner.nextInt();
 
           if (nomorObat1 >= 1 && nomorObat1 <= namaObat.length) {
@@ -426,16 +427,19 @@ public class KasirApotekFinal {
 
           } else {
             System.out.println(
-                "\nMohon pilih nomor obat yang benar! Pesanan obat anda akan hangus jika memasukkan nomor obat yang salah!");
-            System.out.println("\n1. Kembali ke awal program");
-            System.out.println("2. Keluar ");
-            System.out.print("Pilihan Anda: ");
-            pilihan = scanner.nextInt();
+        "\nMohon pilih nomor obat yang benar!");
+      System.out.println("Pesanan obat anda akan hangus!");
+      System.out.println("============================");
+      System.out.println("1. Kembali ke menu awal.");
+      System.out.println("2. Keluar. ");
+      System.out.println("----------------------------");
+      System.out.print("Pilihan Anda: ");
+            pilihan = scanner.next().charAt(0);
 
-            if (pilihan == 1) {
-              System.out.println();
-
-            } else if (pilihan == 2) {
+            if (pilihan == '1') {
+              total = 0;
+       fiturPembayaran();
+            } else if (pilihan == '2') {
               System.out.println("...Terimakasih....");
               System.exit(0);
             } else {
@@ -446,7 +450,7 @@ public class KasirApotekFinal {
         } while (!mengulang);
         memilihObatLagi = true;
         pilihObatLagi = String.valueOf(memilihObatLagi);
-        System.out.print("Apakah Anda ingin memesan obat lagi (y/t)? : ");
+        System.out.print("Apakah Anda ingin memesan obat lagi (y) / cukup (t)? : ");
         pilihObatLagi = scanner.next();
 
         if (pilihObatLagi.equalsIgnoreCase("y")) {
@@ -455,19 +459,27 @@ public class KasirApotekFinal {
 
         else if (pilihObatLagi.equalsIgnoreCase("t")) {
           boolean cobaLagi = true;
+
+          do{
           if (!semua.isEmpty()) {
             semua = semua.substring(0, semua.length() - 2); // untuk menghilangkan koma terakhir
           }
           obatTerpilih = namaObat[nomorObat1 - 1];
           System.out.println("\nTotal akhir semua harga obat yang dipesan : Rp." + total + ",-");
           System.out.println("Semua obat yang anda beli adalah : " + semua);
-
+break;
+        }while (balik);
+        System.out.println();
           do {
 
             if (total < 100000) {
-              System.out.println(
-                  "Silahkan melakukan transaksi pembayaran via cash/debit/credit/Qris dll dengan penjaga kasir! ");
-              break;
+              System.out
+              .println("\nSilahkan melakukan transaksi pembayaran via cash/debit/credit/Qris dll dengan penjaga kasir! ");
+            System.out.println("-----------------------------------------------------------------");
+            System.out.println("[Transaksi tercatat pada laporan pendapatan pada fitur admin]");
+        
+            
+            break;
             }
 
             else if (total >= 100000) {
@@ -550,6 +562,13 @@ public class KasirApotekFinal {
                     System.out.println("----------------------------------------------------");
                     System.out.println("Total harga yang harus anda bayar adalah : "
                         + (total - (total * dis)));
+                        System.out.println("-----------------------------------------------------------------------------");
+                        System.out.println("Terima kasih telah melakukan pembelian di apotek kami! Have a great day!");
+                        System.out
+                          .println("Silahkan melakukan transaksi pembayaran via cash/debit/credit/Qris dll dengan penjaga kasir! ");
+                          System.out.println("[Transaksi tercatat pada laporan pendapatan pada fitur admin]");
+                          
+                      break;
                   }
 
                 } else {
@@ -561,9 +580,13 @@ public class KasirApotekFinal {
 
               } else if (inginDiskonInput.equalsIgnoreCase("t")) {
                 System.out.println("Total harga yang harus dibayar sebanyak : Rp." + total + ",-");
-                System.out.println(
-                    "Silahkan melakukan transaksi pembayaran via cash/debit/credit/Qris dll dengan penjaga kasir! ");
-
+                System.out.println("-----------------------------------------------------------------------------");
+               System.out.println("[Transaksi tercatat pada laporan pendapatan pada fitur admin]");
+                System.out.println("Terima kasih telah melakukan pembelian di apotek kami! Have a great day!");
+                System.out
+                  .println("Silahkan melakukan transaksi pembayaran via cash/debit/credit/Qris dll dengan penjaga kasir! ");
+                
+        break;
               } else {
                 System.out.println("~~~~~");
                 System.out.println("SILAHKAN INPUT YANG BENAR! (y) / (t)!");
@@ -580,13 +603,15 @@ public class KasirApotekFinal {
           totalTransaksi[indeksTransaksi++] = totalTransaksiPembayaran += total;
 
           System.out.println("-----------------------------------------------------------------");
-          System.out.println("Terima kasih telah melakukan pembelian di apotek kami! Have a great day!");
-
-          break;
+          System.out.println("!Terima kasih telah melakukan pembelian di apotek kami! Have a great day!");
+break;
         }
 
         else {
-          System.out.println("\n Pilih (y) / (t) saja. Lakukan lagi!");
+          System.out.println("-----------------------------------------------------");
+          System.out.println("Input salah. Pilih (y) / (t) saja.");
+          System.out.println("WARNING! PILIH YANG BENAR! SISTEM PEMESANAN AKAN DIULANG DARI AWAL!");
+          balik(); // Panggil metode balik untuk mengonfirmasi pilihan
         }
       } else {
         System.out.println("Nomor obat tidak valid. Silakan coba lagi.");
@@ -620,7 +645,7 @@ public class KasirApotekFinal {
     return diskon;
   }
 
-  // private static boolean tanyaUlangProgram() {
+  // private static boolean {
   // boolean validInput = false;
   // char pilihan;
   // do {
@@ -633,19 +658,59 @@ public class KasirApotekFinal {
   // if (pilihan == 't' || pilihan == 'T') {
   // validInput = false;
   // break;
-  // }
-  // }
-
-  // } while (!validInput);
-  // return (pilihan == 'y' || pilihan == 'Y');
-  // }
-  // }
-
+  //
+  private static void tampilkanRingkasanPembelian() {
+    System.out.println("\nRingkasan Pembelian:");
+    System.out.println("Total harga: Rp." + totalTransaksiPembayaran);
+    System.out.println("Obat yang telah dipilih: " + semua); // Asumsi bahwa 'semua' berisi daftar obat yang dipilih
+    System.out.println("------------------------------------------------------------------------------------------------");
+    System.out.println("Silahkan melakukan transaksi pembayaran via cash/debit/credit/Qris dll dengan penjaga kasir! ");
+    System.out.println(
+      "Pemberlakuan transaksi diatas 100ribu akan mendapatkan diskon yang akan ditentukan secara manual oleh penjaga kasir!");
+      System.out.println("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+    System.out.println("Terima kasih telah melakukan pembelian di apotek kami! Have a great day!");
+    System.exit(0);
+   }
+  private static boolean balik() {
+    System.out.print("\nApakah anda ingin memesan obat ulang (y) / cukup (t)?");
+    char pilihan = scanner.next().charAt(0);
+  
+    if (pilihan == 'y' || pilihan == 'Y') {
+     fiturPembayaran();
+    }
+  
+    else if (pilihan == 't' || pilihan == 'T') {
+     tampilkanRingkasanPembelian();
+     
+    }
+  
+    else {
+     System.out.println("Warning! Input tidak valid secara terus menerus!");
+     System.out.println("..Sistem akan ditutup...");
+     System.exit(0);
+    }
+    return pilihan == 'y' || pilihan == 't';
+   }
   private static boolean tanyaUlangProgram() {
     System.out.print("\nApakah Anda ingin memulai kembali program? (y/t): ");
     char pilihan = scanner.next().charAt(0);
-    return (pilihan == 'y' || pilihan == 'Y');
-  }
 
-  // Dan dalam metode main, bagian ini harus diubah:
+    if (pilihan == 'y' || pilihan == 'Y') {
+
+return true;
+    } else if (pilihan == 't' || pilihan == 'T') {
+      System.out.println("Terimakasih sudah berbelanja! Sampai bertemu lagi!");
+      System.exit(0);
+      return false;
+    } else {
+       System.out.println("\nWarning! Input tidak valid! tidak (y) / (t)!");
+     System.out.println("..Sistem akan ditutup...");
+     System.exit(0);
+    }
+    return false;
+
+    
+  } 
 }
+  // Dan dalam metode main, bagian ini harus diubah:
+
