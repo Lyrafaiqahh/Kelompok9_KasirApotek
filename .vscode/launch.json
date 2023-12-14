@@ -6,6 +6,20 @@
     "configurations": [
         {
             "type": "java",
+            "name": "KASIRFIX",
+            "request": "launch",
+            "mainClass": "KASIRFIX",
+            "projectName": "Kelompok9_KasirApotek_49d0da25"
+        },
+        {
+            "type": "java",
+            "name": "coba",
+            "request": "launch",
+            "mainClass": "coba",
+            "projectName": "Kelompok9_KasirApotek_49d0da25"
+        },
+        {
+            "type": "java",
             "name": "Current File",
             "request": "launch",
             "mainClass": "${file}"
