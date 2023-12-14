@@ -10,12 +10,14 @@ public class KASIRFIX {
  private static final String ADMIN_PASSWORD = "admin123";
  private static Scanner scanner = new Scanner(System.in);
  private static boolean ulangProgram = true;
+ private static boolean ulangProgram1 = true;
  private static boolean balik = true;
  private static int hargaTerpilih = 0;
  private static int total = 0;
  private static ArrayList<String> obatDibeli = new ArrayList<>();
  private static ArrayList<Integer> hargaDibeli = new ArrayList<>();
- 
+ // private static ArrayList<Double> diskonTransaksi = new ArrayList<>();
+ // private static ArrayList<Double> hargaAfterDiskon = new ArrayList<>();
 
  // BAGIAN PENENTUAN ADMIN ATAU USER //
  public static void main(String[] args) {
@@ -347,23 +349,31 @@ public class KASIRFIX {
  // }
 
  private static void lihatTotalTransaksi() {
-  System.out.println("\n---  Menu Total Transaksi ---");
-  System.out.println("Berikut merupakan laporan pendapatan para pengguna yang sudah bertransaksi hari ini :");
-
-  for (int i = 0; i < indeksTransaksi; i++) {
-   double hargaSebelumDiskon = totalPembelian[i];
-   System.out.println("\nTransaksi ke-" + (i + 1) + ": Rp." + hargaSebelumDiskon + ",-");
-
-   if (hargaSebelumDiskon > 100000) {
-    double diskon = hitungDiskon(hargaSebelumDiskon);
-    double hargaSetelahDiskon = hargaSebelumDiskon - (hargaSebelumDiskon * diskon);
-
-    System.out.println("  Harga Sebelum Diskon: Rp." + hargaSebelumDiskon + ",-");
-    System.out.println("  Diskon " + (diskon * 100) + "%: Rp." + (hargaSebelumDiskon * diskon) + ",-");
-    System.out.println("  Harga Sesudah Diskon: Rp." + hargaSetelahDiskon + ",-");
-   }
+    System.out.println("\n--- Total Transaksi ---");
+    System.out.println("LAPORAN PENDAPATAN TRANSAKSI PADA HARI INI :");
+    for (int i = 0; i < indeksTransaksi; i++) {
+        System.out.println("\nTransaksi ke-" + (i + 1) + ": Rp." + totalPembelian[i] + ",-");
+  
+        if (totalPembelian[i] > 100000) {
+            double diskon = hitungDiskon(totalPembelian[i]);
+            double hargaSebelumDiskon = totalPembelian[i];
+            double hargaSetelahDiskon = hargaSebelumDiskon - (hargaSebelumDiskon * diskon);
+  
+            System.out.println("  Harga Sebelum Diskon: Rp." + hargaSebelumDiskon + ",-");
+            System.out.println("  Diskon " + (diskon * 100) + "%: Rp." + (hargaSebelumDiskon * diskon) + ",-");
+            System.out.println("  Harga Sesudah Diskon: Rp." + hargaSetelahDiskon + ",-");
+            System.out.println("-------------------------------------------------------\n\n");
+        }
+    }
+  
+    int totalKeseluruhan = 0;
+    for (int i = 0; i < indeksTransaksi; i++) {
+        totalKeseluruhan += totalPembelian[i];
+    }
+  
+    System.out.println("Total Keseluruhan: Rp." + totalKeseluruhan + ",-");
+    ulangProgram = tanyaUlangProgram();
   }
- }
 
  // BAGIAN USER //
 
@@ -501,6 +511,8 @@ public class KASIRFIX {
        semua = semua.substring(0, semua.length() - 2); // untuk menghilangkan koma terakhir
       }
       obatTerpilih = namaObat[nomorObat1 - 1];
+      System.out.println("\nTotal akhir semua harga obat yang dipesan : Rp." + total + ",-");
+      System.out.println("Semua obat yang anda beli adalah : " + semua);
       break;
      } while (balik);
      System.out.println();
@@ -592,6 +604,7 @@ public class KASIRFIX {
           System.out.println("Total harga yang harus anda bayar adalah : "
             + (total - (total * dis)));
           tampilkanRingkasanPembelian();
+
           break;
          }
 
@@ -605,7 +618,6 @@ public class KASIRFIX {
        } else if (inginDiskonInput.equalsIgnoreCase("t")) {
         tampilkanRingkasanPembelian();
         break;
-
        } else {
         System.out.println("~");
         System.out.println("SILAHKAN INPUT YANG BENAR! (y) / (t)!");
@@ -663,7 +675,43 @@ public class KASIRFIX {
   return diskon;
  }
 
- 
+ // private static void tampilkanRingkasanPembelian() {
+ // System.out.println("\n========== STRUK PEMBELIAN ==========");
+ // System.out.printf("%-30s%-15s\n", "Nama Obat", "Harga (Rp)");
+ // System.out.println("-------------------------------------");
+
+ // for (int i = 0; i < obatDibeli.size(); i++) {
+ // System.out.printf("%-30s%-15s\n", obatDibeli.get(i), hargaDibeli.get(i));
+ // total += hargaDibeli.get(i);
+ // }
+ // System.out.println("-------------------------------------");
+ // System.out.printf("%-30s%-15s\n", "Total Harga", total);
+ // double totalDiskon = 0;
+
+ // for (int i = 0; i < diskonTransaksi.size(); i++) {
+ // double diskon = diskonTransaksi.get(i);
+ // double hargaSebelumDiskon = hargaDibeli.get(i);
+ // double diskonAmount = hargaSebelumDiskon * diskon;
+ // double hargaAfterDiskon = hargaSebelumDiskon - diskonAmount;
+ // totalDiskon += diskonAmount;
+
+ // System.out.printf("%-30s%-15s%-15s\n", "Diskon", diskon * 100,
+ // hargaAfterDiskon);
+
+ // }
+ // System.out.println("-------------------------------------");
+ // System.out.printf("%-30s%-15s\n", "Total Diskon", totalDiskon);
+ // System.out.printf("%-30s%-15s\n", "Total Setelah Diskon", total -
+ // totalDiskon);
+ // System.out.println("=====================================");
+
+ // System.out.println("\nSilahkan melakukan transaksi pembayaran via
+ // cash/debit/credit/Qris dll dengan penjaga kasir! ");
+ // System.out.println("~~~~~~~~~~");
+ // System.out.println("Terima kasih telah melakukan pembelian di apotek kami!
+ // Have a great day!");
+ // System.exit(0);
+ // }
 
  private static void tampilkanRingkasanPembelian() {
   System.out.println("\n========== STRUK PEMBELIAN ==========");
@@ -691,7 +739,7 @@ public class KASIRFIX {
   System.out.println("\nSilahkan melakukan transaksi pembayaran via cash/debit/credit/Qris dll dengan penjaga kasir! ");
   System.out.println("~~~~~~~~~~");
   System.out.println("Terima kasih telah melakukan pembelian di apotek kami! Have a great day!");
-  System.exit(0);
+  ulangProgram1 = true;
  }
 
  private static boolean balik() {
@@ -734,4 +782,11 @@ public class KASIRFIX {
   return false;
 
  }
+
+ private static boolean tanyaUlangProgram1() {
+    System.out.print("\nApakah Anda ingin memulai kembali program? (y/t): ");
+    char pilihan = scanner.next().charAt(0);
+
+    return (pilihan == 'y' || pilihan == 'Y');
+    }
 }

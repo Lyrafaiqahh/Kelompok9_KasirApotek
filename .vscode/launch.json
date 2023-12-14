@@ -6,6 +6,27 @@
     "configurations": [
         {
             "type": "java",
+            "name": "demi",
+            "request": "launch",
+            "mainClass": "demi",
+            "projectName": "Kelompok9_KasirApotek_49d0da25"
+        },
+        {
+            "type": "java",
+            "name": "he",
+            "request": "launch",
+            "mainClass": "he",
+            "projectName": "Kelompok9_KasirApotek_49d0da25"
+        },
+        {
+            "type": "java",
+            "name": "KasirApotekFinish",
+            "request": "launch",
+            "mainClass": "KasirApotekFinish",
+            "projectName": "Kelompok9_KasirApotek_49d0da25"
+        },
+        {
+            "type": "java",
             "name": "KASIRFIX",
             "request": "launch",
             "mainClass": "KASIRFIX",
