@@ -16,8 +16,6 @@ public class KASIRFIX {
  private static int total = 0;
  private static ArrayList<String> obatDibeli = new ArrayList<>();
  private static ArrayList<Integer> hargaDibeli = new ArrayList<>();
- // private static ArrayList<Double> diskonTransaksi = new ArrayList<>();
- // private static ArrayList<Double> hargaAfterDiskon = new ArrayList<>();
 
  // BAGIAN PENENTUAN ADMIN ATAU USER //
  public static void main(String[] args) {
@@ -71,7 +69,7 @@ public class KASIRFIX {
    System.out.println("1. Kelola Stok Obat");
    System.out.println("2. Identifikasi Kadaluwarsa");
    System.out.println("3. Total Transaksi");
-   System.out.println("4. Mengulang program");
+   System.out.println("4. Mengulang program (menu utama)");
    System.out.println("5. Keluar");
    System.out.print("Masukkan pilihan Anda (berupa angka): ");
    adminChoice = scanner.nextInt();
@@ -316,43 +314,11 @@ public class KASIRFIX {
   input.close();
  }
 
- // private static void lihatTotalTransaksi() {
- // System.out.println("\n--- Menu Total Transaksi ---");
- // System.out.println("Berikut merupakan laporan pendapatan para pengguna yang
- // sudah bertransaksi hari ini :");
- // for (int i = 0; i < indeksTransaksi; i++) {
- // System.out.println("\nTransaksi ke-" + (i + 1) + ": Rp." + totalPembelian[i]
- // + ",-");
-
- // if (totalPembelian[i] > 100000) {
- // double diskon = hitungDiskon(totalPembelian[i]);
- // diskonTransaksi.add(diskon);
- // double hargaSebelumDiskon = totalPembelian[i];
- // double hargaSetelahDiskon = hargaSebelumDiskon - (hargaSebelumDiskon *
- // diskon);
- // hargaAfterDiskon.add(hargaSetelahDiskon);
-
- // System.out.println(" Harga Sebelum Diskon: Rp." + hargaSebelumDiskon + ",-");
- // System.out.println(" Diskon " + (diskon * 100) + "%: Rp." +
- // (hargaSebelumDiskon * diskon) + ",-");
- // System.out.println(" Harga Sesudah Diskon: Rp." + hargaSetelahDiskon + ",-");
- // }
- // }
-
- // int totalKeseluruhan = 0;
- // for (int i = 0; i < indeksTransaksi; i++) {
- // totalKeseluruhan += totalPembelian[i];
- // }
- // System.out.println("==================================================");
- // System.out.println("Total Keseluruhan: Rp." + totalKeseluruhan + ",-");
- // tanyaUlangProgram();
- // }
-
  private static void lihatTotalTransaksi() {
-    System.out.println("\n--- Total Transaksi ---");
-    System.out.println("LAPORAN PENDAPATAN TRANSAKSI PADA HARI INI :");
+    System.out.println("\n----------- Total Transaksi ---------------");
+    System.out.println("BERIKUT MERUPAKAN LAPORAN PENDAPATAN TRANSAKSI PADA HARI INI");
     for (int i = 0; i < indeksTransaksi; i++) {
-        System.out.println("\nTransaksi ke-" + (i + 1) + ": Rp." + totalPembelian[i] + ",-");
+        System.out.println("\nTransaksi ke-" + (i + 1) + ": Rp." + totalPembelian[i] + ",-\n");
   
         if (totalPembelian[i] > 100000) {
             double diskon = hitungDiskon(totalPembelian[i]);
@@ -362,7 +328,7 @@ public class KASIRFIX {
             System.out.println("  Harga Sebelum Diskon: Rp." + hargaSebelumDiskon + ",-");
             System.out.println("  Diskon " + (diskon * 100) + "%: Rp." + (hargaSebelumDiskon * diskon) + ",-");
             System.out.println("  Harga Sesudah Diskon: Rp." + hargaSetelahDiskon + ",-");
-            System.out.println("-------------------------------------------------------\n\n");
+          
         }
     }
   
@@ -370,7 +336,6 @@ public class KASIRFIX {
     for (int i = 0; i < indeksTransaksi; i++) {
         totalKeseluruhan += totalPembelian[i];
     }
-  
     System.out.println("Total Keseluruhan: Rp." + totalKeseluruhan + ",-");
     ulangProgram = tanyaUlangProgram();
   }
@@ -485,6 +450,7 @@ public class KASIRFIX {
       if (pilihan == '1') {
        total = 0;
        fiturPembayaran();
+       break;
       } else if (pilihan == '2') {
        System.out.println("...Terimakasih....");
        System.exit(0);
@@ -501,6 +467,7 @@ public class KASIRFIX {
 
     if (pilihObatLagi.equalsIgnoreCase("y")) {
      memilihObatLagi = true;
+     
     }
 
     else if (pilihObatLagi.equalsIgnoreCase("t")) {
@@ -511,11 +478,12 @@ public class KASIRFIX {
        semua = semua.substring(0, semua.length() - 2); // untuk menghilangkan koma terakhir
       }
       obatTerpilih = namaObat[nomorObat1 - 1];
-      System.out.println("\nTotal akhir semua harga obat yang dipesan : Rp." + total + ",-");
-      System.out.println("Semua obat yang anda beli adalah : " + semua);
+     
       break;
      } while (balik);
      System.out.println();
+    
+    
      do {
 
       if (total < 100000) {
@@ -550,11 +518,9 @@ public class KASIRFIX {
            poin = 20;
           }
 
-          System.out.println("Selamat! Anda mendapatkan diskon " + (dis * 100)
+          System.out.println("\n\nSelamat! Anda mendapatkan diskon " + (dis * 100)
             + "% & tambahan poin " + poin + "! [Doorprize = 50++ poin]");
-          System.out.println("----------------------------------------------------");
-          System.out.println("Total harga yang harus anda bayar adalah : "
-            + (total - (total * dis)));
+            tampilkanRingkasanPembelian();
          }
 
         } else if (kartuMember.equalsIgnoreCase("t")) {
@@ -604,7 +570,6 @@ public class KASIRFIX {
           System.out.println("Total harga yang harus anda bayar adalah : "
             + (total - (total * dis)));
           tampilkanRingkasanPembelian();
-
           break;
          }
 
@@ -613,15 +578,18 @@ public class KASIRFIX {
          System.out.println("INPUT PILIHAN YANG BENAR! (y) / (t)! ");
          System.out.println("...kembali ke pertanyaan diskon....");
          cobaLagi = false;
+         break;
         }
 
        } else if (inginDiskonInput.equalsIgnoreCase("t")) {
         tampilkanRingkasanPembelian();
         break;
+
        } else {
         System.out.println("~");
         System.out.println("SILAHKAN INPUT YANG BENAR! (y) / (t)!");
         cobaLagi = false;
+        break;
        }
       }
 
@@ -633,15 +601,17 @@ public class KASIRFIX {
      // Menyimpan total transaksi pada array totalTransaksi
      totalTransaksi[indeksTransaksi++] = totalTransaksiPembayaran += total;
 
-     tampilkanRingkasanPembelian();
+    
      break;
     }
 
     else {
      System.out.println("-----------------------------------------------------");
      System.out.println("Input salah. Pilih (y) / (t) saja.");
-     System.out.println("WARNING! PILIH YANG BENAR! SISTEM PEMESANAN AKAN DIULANG DARI AWAL!");
+     System.out.println("WARNING! PILIH YANG BENAR! SISTEM PEMESANAN AKAN DIULANG DARI AWAL! (pemesanan tetap sama)");
+     
      balik(); // Panggil metode balik untuk mengonfirmasi pilihan
+     break;
     }
    } else {
     System.out.println("Nomor obat tidak valid. Silakan coba lagi.");
@@ -675,53 +645,15 @@ public class KASIRFIX {
   return diskon;
  }
 
- // private static void tampilkanRingkasanPembelian() {
- // System.out.println("\n========== STRUK PEMBELIAN ==========");
- // System.out.printf("%-30s%-15s\n", "Nama Obat", "Harga (Rp)");
- // System.out.println("-------------------------------------");
-
- // for (int i = 0; i < obatDibeli.size(); i++) {
- // System.out.printf("%-30s%-15s\n", obatDibeli.get(i), hargaDibeli.get(i));
- // total += hargaDibeli.get(i);
- // }
- // System.out.println("-------------------------------------");
- // System.out.printf("%-30s%-15s\n", "Total Harga", total);
- // double totalDiskon = 0;
-
- // for (int i = 0; i < diskonTransaksi.size(); i++) {
- // double diskon = diskonTransaksi.get(i);
- // double hargaSebelumDiskon = hargaDibeli.get(i);
- // double diskonAmount = hargaSebelumDiskon * diskon;
- // double hargaAfterDiskon = hargaSebelumDiskon - diskonAmount;
- // totalDiskon += diskonAmount;
-
- // System.out.printf("%-30s%-15s%-15s\n", "Diskon", diskon * 100,
- // hargaAfterDiskon);
-
- // }
- // System.out.println("-------------------------------------");
- // System.out.printf("%-30s%-15s\n", "Total Diskon", totalDiskon);
- // System.out.printf("%-30s%-15s\n", "Total Setelah Diskon", total -
- // totalDiskon);
- // System.out.println("=====================================");
-
- // System.out.println("\nSilahkan melakukan transaksi pembayaran via
- // cash/debit/credit/Qris dll dengan penjaga kasir! ");
- // System.out.println("~~~~~~~~~~");
- // System.out.println("Terima kasih telah melakukan pembelian di apotek kami!
- // Have a great day!");
- // System.exit(0);
- // }
-
- private static void tampilkanRingkasanPembelian() {
+ public static void tampilkanRingkasanPembelian() {
+ 
   System.out.println("\n========== STRUK PEMBELIAN ==========");
   System.out.printf("%-30s%-15s\n", "Nama Obat", "Harga (Rp)");
   System.out.println("-------------------------------------");
-
   double totalHargaAsli = 0; // Total harga sebelum diskon
 
   for (int i = 0; i < obatDibeli.size(); i++) {
-   double hargaAsli = hargaDibeli.get(i);
+  int hargaAsli = hargaDibeli.get(i);
    totalHargaAsli += hargaAsli; // Menambahkan harga asli ke total
    System.out.printf("%-30s%-15s\n", obatDibeli.get(i), hargaAsli);
   }
@@ -739,6 +671,7 @@ public class KASIRFIX {
   System.out.println("\nSilahkan melakukan transaksi pembayaran via cash/debit/credit/Qris dll dengan penjaga kasir! ");
   System.out.println("~~~~~~~~~~");
   System.out.println("Terima kasih telah melakukan pembelian di apotek kami! Have a great day!");
+  obatDibeli.clear();
   ulangProgram1 = true;
  }
 
@@ -747,7 +680,10 @@ public class KASIRFIX {
   char pilihan = scanner.next().charAt(0);
 
   if (pilihan == 'y' || pilihan == 'Y') {
+    total = 0;
    fiturPembayaran();
+   
+   
   }
 
   else if (pilihan == 't' || pilihan == 'T') {
@@ -769,11 +705,14 @@ public class KASIRFIX {
 
   if (pilihan == 'y' || pilihan == 'Y') {
 
+    
    return true;
+   
   } else if (pilihan == 't' || pilihan == 'T') {
    System.out.println("Terimakasih sudah berbelanja! Sampai bertemu lagi!");
    System.exit(0);
    return false;
+   
   } else {
    System.out.println("\nWarning! Input tidak valid! tidak (y) / (t)!");
    System.out.println("..Sistem akan ditutup...");
@@ -784,9 +723,19 @@ public class KASIRFIX {
  }
 
  private static boolean tanyaUlangProgram1() {
-    System.out.print("\nApakah Anda ingin memulai kembali program? (y/t): ");
+    System.out.print("\n1Apakah Anda ingin memulai kembali program? (y/t): ");
     char pilihan = scanner.next().charAt(0);
+    
+    if (pilihan == 't' || pilihan == 'T') {
+   System.out.println("Terimakasih sudah berbelanja! Sampai bertemu lagi!");
+   System.exit(0);
+   return false;
 
+  } else {
+   System.out.println("\nWarning! Input tidak valid! tidak (y) / (t)!");
+   System.out.println("..Sistem akan ditutup...");
+   System.exit(0);
+  }
     return (pilihan == 'y' || pilihan == 'Y');
     }
 }
